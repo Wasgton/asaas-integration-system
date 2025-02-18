@@ -1,0 +1,46 @@
+services:
+
+   php:
+     build:
+       context: ./docker/php
+       args:
+         - uid=1000
+         - user=1000
+     container_name: php_payment
+     tty: true
+     volumes:
+       - ./:/var/www/html
+     networks:
+       - php_net
+
+   nginx:
+     image: nginx:stable-alpine
+     container_name: nginx_payment
+     tty: true
+     ports:
+       - "8000:80"
+       - "8443:443"
+     volumes:
+       - ./:/var/www/html
+       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+     depends_on:
+       - db
+       - php
+     networks:
+       - php_net
+
+   db:
+     build: ./docker/mysql/.
+     container_name: mysql_payment
+     environment:
+       - MYSQL_ROOT_PASSWORD=payment
+       - MYSQL_DATABASE=payment
+     networks:
+       - php_net
+     ports:
+       - "4306:3306"
+     volumes:
+       - ./docker/mysql/files:/var/lib/mysql
+
+networks:
+  php_net:
