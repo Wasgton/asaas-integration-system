@@ -2,7 +2,7 @@
 
 namespace App\Payments;
 
-use App\Payments\PaymentMethods\PaymentMethod;
+use App\Payments\PaymentMethods\Contracts\PaymentMethod;
 
 class PaymentProcessor
 {

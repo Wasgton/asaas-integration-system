@@ -2,7 +2,7 @@
 
 namespace App\Payments\PaymentMethods;
 
-class CreditCardPayment implements PaymentMethod
+class CreditCardPayment extends Payment
 {
 
     public function processPayment(array $details)

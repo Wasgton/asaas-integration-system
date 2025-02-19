@@ -2,7 +2,7 @@
 
 namespace App\Payments\PaymentMethods;
 
-class PixPayment implements PaymentMethod
+class PixPayment extends Payment
 {
 
     public function processPayment(array $details)

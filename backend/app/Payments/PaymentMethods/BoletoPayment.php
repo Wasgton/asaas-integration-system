@@ -2,11 +2,11 @@
 
 namespace App\Payments\PaymentMethods;
 
-class BoletoPayment implements PaymentMethod
+class BoletoPayment extends Payment
 {
 
     public function processPayment(array $details)
     {
-        // TODO: Implement processPayment() method.
+        // TODO: Implement processPayment() method. 
     }
 }
