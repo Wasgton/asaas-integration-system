@@ -2,6 +2,10 @@
 
 namespace Tests\Unit;
 
+use App\Payments\Factories\PaymentFactory;
+use App\Payments\Methods\BoletoPayment;
+use App\Payments\Methods\CreditCardPayment;
+use App\Payments\Methods\PixPayment;
 use PHPUnit\Framework\TestCase;
 
 class PaymentFactoryTest extends TestCase
