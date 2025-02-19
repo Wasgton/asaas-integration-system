@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Payments\Methods;
+namespace App\Payments\PaymentMethods;
 
-class BoletoPayment implements PaymentMethod
+class PixPayment implements PaymentMethod
 {
 
     public function processPayment(array $details)

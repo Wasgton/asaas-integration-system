@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Payments\Methods;
+namespace App\Payments\PaymentMethods;
 
 interface PaymentMethod {
     public function processPayment(array $details);

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Payments\Methods;
+namespace App\Payments\PaymentMethods;
 
-class PixPayment implements PaymentMethod
+class CreditCardPayment implements PaymentMethod
 {
 
     public function processPayment(array $details)
