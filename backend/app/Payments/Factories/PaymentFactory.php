@@ -2,10 +2,10 @@
 
 namespace App\Payments\Factories;
 
-use App\Payments\Methods\BoletoPayment;
-use App\Payments\Methods\CreditCardPayment;
-use App\Payments\Methods\PaymentMethod;
-use App\Payments\Methods\PixPayment;
+use App\Payments\PaymentMethods\BoletoPayment;
+use App\Payments\PaymentMethods\CreditCardPayment;
+use App\Payments\PaymentMethods\PaymentMethod;
+use App\Payments\PaymentMethods\PixPayment;
 
 class PaymentFactory
 {
