@@ -115,17 +115,4 @@ class CustomerServiceTest extends TestCase
         $this->assertDatabaseHas('customers', $create);
     }
     
-//    public function test_should_get_client_from_api()
-//    {
-//        $client = new \GuzzleHttp\Client();
-//        $response = $client->request('GET', 'https://api-sandbox.asaas.com/v3/customers?cpfCnpj=75813927590', [
-//            'headers' => [
-//                'accept' => 'application/json',
-//                'access_token' => '$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmNjODhlZjE1LTA2OGQtNDlhZi1hZmRhLTg0ZDhmOTI3NDdmZDo6JGFhY2hfNDFlYTgwM2YtNjNlNi00MGY4LWE2ODctODg3M2UxYzY0Mzdj',
-//            ],
-//        ]);
-//        $arrayResponse = json_decode((string)$response->getBody(), true);
-//        dd($arrayResponse);
-//    }
-    
 }
