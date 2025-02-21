@@ -19,7 +19,7 @@ class CustomerService extends AsaasAbstractService
      * @throws HttpException
      * @throws GuzzleException
      */
-    public function ensureCustomerExists(array $paymentDetails) : Customer
+    public function ensureCustomerExists(array $customerDetails) : Customer
     {
         $user = auth()->user();
         $existingCustomer = $this->customerRepository->getCustomerFromUser($user);
@@ -28,12 +28,12 @@ class CustomerService extends AsaasAbstractService
         }
         $searchedCustomer = $this->sendCustomerSearchRequest($user->email);
         if (!$searchedCustomer) {
-            return $this->createCustomer($paymentDetails);
+            return $this->createCustomer($customerDetails);
         }
         $customer = [
             'user_id' => $user->id,
             'asaas_id' => $searchedCustomer['id'],
-            ...$paymentDetails
+            ...$customerDetails
         ];
         return $this->customerRepository->create($customer);
     }
