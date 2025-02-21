@@ -10,17 +10,11 @@ use App\Services\CustomerService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class CustomerServiceTest extends TestCase
 {
-    use WithFaker, RefreshDatabase;
-
-    protected function setUpFaker(): void
-    {
-        $this->faker = $this->makeFaker('pt_BR');
-    }
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */
