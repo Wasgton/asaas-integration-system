@@ -16,9 +16,9 @@ class PaymentFactoryTest extends TestCase
      */
     public function test_should_get_payment_methods_from_factory() : void
     {    
-        $creditCardMethod = PaymentFactory::createPaymentMethod('credit_card');
-        $boletoMethod = PaymentFactory::createPaymentMethod('boleto');
-        $pixMethod = PaymentFactory::createPaymentMethod('pix');
+        $creditCardMethod = PaymentFactory::createPaymentMethod('CREDIT_CARD');
+        $boletoMethod = PaymentFactory::createPaymentMethod('BOLETO');
+        $pixMethod = PaymentFactory::createPaymentMethod('PIX');
 
         $this->assertInstanceOf(CreditCardPayment::class, $creditCardMethod);
         $this->assertInstanceOf(BoletoPayment::class, $boletoMethod);

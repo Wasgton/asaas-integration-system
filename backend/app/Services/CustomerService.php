@@ -3,17 +3,17 @@
 namespace App\Services;
 
 use App\Models\Customer;
-use App\Repositories\CustomerRepository;
+use App\Repositories\AsaasApiRepository;
+use App\Repositories\Contracts\CustomerRepository;
 use GuzzleHttp\Exception\GuzzleException;
 use HttpException;
-use Illuminate\Http\Response;
 
-class CustomerService extends AsaasAbstractService
+class CustomerService
 {
-    public function __construct(private readonly CustomerRepository $customerRepository)
-    {
-        parent::__construct();
-    }
+    public function __construct(
+        private readonly CustomerRepository $customerRepository,
+        private readonly AsaasApiRepository $asaasApiRepository,
+    ) {}
 
     /**
      * @throws HttpException
@@ -26,7 +26,7 @@ class CustomerService extends AsaasAbstractService
         if ($existingCustomer) {
             return $existingCustomer;
         }
-        $searchedCustomer = $this->sendCustomerSearchRequest($user->email);
+        $searchedCustomer = $this->asaasApiRepository->getCustomerByEmail($user->email);
         if (!$searchedCustomer) {
             return $this->createCustomer($customerDetails);
         }
@@ -45,7 +45,7 @@ class CustomerService extends AsaasAbstractService
     public function createCustomer(array $data) : Customer
     {
         $requestData = $this->prepareCustomerRequestData($data);
-        $data['asaas_id'] = $this->sendCustomerCreationRequest($requestData);
+        $data['asaas_id'] = $this->asaasApiRepository->sendCustomerCreationRequest($requestData);
         $data['user_id'] = auth()->user()->id;
         return $this->customerRepository->create($data);
     }
@@ -59,36 +59,7 @@ class CustomerService extends AsaasAbstractService
         ];
     }
 
-    /**
-     * @throws HttpException
-     * @throws GuzzleException
-     */
-    private function sendCustomerCreationRequest(array $customerRequestData): string
-    {
-        $response = $this->client->request('POST', 'customers', ['json' => $customerRequestData]);
-        if ($response->getStatusCode() !== Response::HTTP_OK) {
-            throw new HttpException('Error to create customer');
-        }
-        $apiResponseData = json_decode((string)$response->getBody(), true);
-        return $apiResponseData['id'];
-    }
-
-    /**
-     * @throws HttpException
-     * @throws GuzzleException
-     */
-    private function sendCustomerSearchRequest(string $email): array|null
-    {
-        $response = $this->client->request('GET', 'customers?email='.$email);
-        if ($response->getStatusCode() !== Response::HTTP_OK) {
-            throw new HttpException('Error to create customer');
-        }
-        $arrayResponse = json_decode((string)$response->getBody(), true);
-        if (!$arrayResponse['totalCount']) {
-            return null;
-        }
-        return $arrayResponse['data'][0];
-    }
-
+   
+    
 
 }

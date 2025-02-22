@@ -13,9 +13,9 @@ class PaymentFactory
     public static function createPaymentMethod(string $type) : PaymentMethod
     {
          return match ($type) {
-             'boleto' => new BoletoPayment(),
-             'credit_card' => new CreditCardPayment(),
-             'pix' => new PixPayment(),
+             'BOLETO' => app(BoletoPayment::class),
+             'CREDIT_CARD' => app(CreditCardPayment::class),
+             'PIX' => app(PixPayment::class),
              default => throw new DomainException("Payment method not supported")
          };
     }

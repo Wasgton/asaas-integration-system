@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('customers', static function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->foreignId('user_id')->index();
             $table->string('asaas_id')->unique();
             $table->string('name');
             $table->string('document', 14)->unique();
