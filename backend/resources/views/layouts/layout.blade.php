@@ -8,12 +8,25 @@
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen justify-between">
 
-<header class="bg-blue-600 text-white p-4 shadow-md">
+<header class="flex bg-blue-600 text-white p-4 shadow-md justify-between w-full">    
     <div class="container mx-auto flex justify-between items-center">
         <h1 class="text-lg font-bold">Página de Pagamento</h1>
     </div>
+    @guest
+    <div class="container mx-auto flex items-center justify-end space-x-4">
+        <a href="{{ route('login') }}" class="text-white hover:text-blue-500">Login</a>
+        <a href="{{ route('register') }}" class="text-white hover:text-blue-500">Registrar</a>
+    </div>
+    @endguest
+    @auth
+        <div class="container mx-auto flex items-center justify-end space-x-4">
+            <a href="{{ route('register') }}" class="text-white hover:text-blue-500">Perfil</a>
+            <a href="{{ route('login') }}" class="text-white hover:text-blue-500">
+                Logout
+            </a>
+        </div>
+    @endauth
 </header>
-
 <main class="container mx-auto mt-10 ">
     @yield('content')
 </main>
