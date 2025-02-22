@@ -2,9 +2,11 @@
 
 namespace App\Payments\PaymentMethods;
 
+use App\Exceptions\ApiException;
 use App\Payments\PaymentMethods\Contracts\PaymentMethod;
 use App\Repositories\Contracts\ApiRepository;
 use App\Rules\CpfCnpj;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -23,7 +25,11 @@ class CreditCardPayment implements PaymentMethod
         $this->validate($paymentData);
         $customerId = $paymentData['customer']->id;
         $paymentData['customer'] = $paymentData['customer']->asaas_id;
+        $paymentData['dueDate'] = Carbon::now()->addDays(5)->format('Y-m-d');
         $responseData = $this->apiRepository->createPayment($paymentData);
+        if (isset($responseData['errors'])) {
+            throw new ApiException($responseData['errors'][0]['description'] ?? 'Payment failed');
+        }
         return [
             'asaas_id' => $responseData['id'],
             'customer_id' => $customerId,
@@ -53,11 +59,10 @@ class CreditCardPayment implements PaymentMethod
             'creditCardHolderInfo.name'              => 'required|string|max:255',
             'creditCardHolderInfo.email'             => 'required|email|max:255',
             'creditCardHolderInfo.cpfCnpj'           => ['required', new CpfCnpj],
-            'creditCardHolderInfo.postalCode'        => 'required|regex:/^[0-9]{5}-[0-9]{3}$/',
+            'creditCardHolderInfo.postalCode'        => 'required|digits:8',
             'creditCardHolderInfo.addressNumber'     => 'required|numeric',
             'creditCardHolderInfo.addressComplement' => 'nullable|string|max:255',
             'creditCardHolderInfo.phone'             => 'required|regex:/^[0-9]{2}9[0-9]{4}[0-9]{4}$/',
-            
         ],
         [
             'creditCard.required'                             => 'Credit card not informed',

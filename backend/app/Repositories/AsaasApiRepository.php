@@ -27,50 +27,57 @@ class AsaasApiRepository implements ApiRepository
             ],
         ]);
     }
-    
+
     /**
      * @throws HttpException
      * @throws GuzzleException
+     * @throws \JsonException
      */
     public function sendCustomerCreationRequest(array $customerRequestData): string
     {
         $response = $this->client->request('POST', 'customers', ['json' => $customerRequestData]);
-        $apiResponseData = json_decode((string)$response->getBody(), true);
+        $apiResponseData = json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
         return $apiResponseData['id'];
     }
 
     /**
      * @throws HttpException
      * @throws GuzzleException
+     * @throws \JsonException
      */
     public function getCustomerByEmail(string $email): array|null
     {
         $response = $this->client->request('GET', 'customers?email='.$email);
-        $arrayResponse = json_decode((string)$response->getBody(), true);
-        if (!$arrayResponse['totalCount']) {
-            return null;
-        }
-        return $arrayResponse['data'][0];
-    }
-    
-    /**
-     * @throws HttpException
-     * @throws GuzzleException
-     */
-    public function getCustomerById(string $id): array|null
-    {
-        $response = $this->client->request('GET', 'customers/'.$id);
-        $arrayResponse = json_decode((string)$response->getBody(), true);
+        $arrayResponse = json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
         if (!$arrayResponse['totalCount']) {
             return null;
         }
         return $arrayResponse['data'][0];
     }
 
+    /**
+     * @throws HttpException
+     * @throws GuzzleException
+     * @throws \JsonException
+     */
+    public function getCustomerById(string $id): array|null
+    {
+        $response = $this->client->request('GET', 'customers/'.$id);
+        $arrayResponse = json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        if (!$arrayResponse['totalCount']) {
+            return null;
+        }
+        return $arrayResponse['data'][0];
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws \JsonException
+     */
     public function createPayment(array $data) : array
     {
         $response = $this->client->request('POST', 'payments', ['http_errors' => false, 'json' => $data]);
-        return json_decode((string)$response->getBody(), true);
+        return json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
     }
 
 }

@@ -17,7 +17,6 @@ Route::middleware('auth')->group(function () {
 Route::group(['prefix'=>'payment'], static function(){
     Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
     Route::post('/', [PaymentController::class,'makePayment'])->name('payment');
-    Route::get('/confirmation', [PaymentController::class])->name('payment.confirmation');
 });
 
 require __DIR__.'/auth.php';

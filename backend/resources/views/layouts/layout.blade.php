@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Pagamento</title>
+    <title>Sistema de pagamento</title>
     @vite(['resources/css/app.css'])
 </head>
 <body class="bg-gray-100 font-sans flex flex-col min-h-screen justify-between">
 
 <header class="flex bg-blue-600 text-white p-4 shadow-md justify-between w-full">    
     <div class="container mx-auto flex justify-between items-center">
-        <h1 class="text-lg font-bold">Página de Pagamento</h1>
+        <h1 class="text-lg font-bold">
+            <a href="{{route('index')}}">Sistema de pagamento</a>
+        </h1>
     </div>
     @guest
     <div class="container mx-auto flex items-center justify-end space-x-4">
