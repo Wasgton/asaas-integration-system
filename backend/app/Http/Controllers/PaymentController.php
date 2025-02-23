@@ -7,6 +7,7 @@ use App\Http\Requests\PaymentRequest;
 use App\Http\Resources\GetQrCodeResource;
 use App\Services\PaymentService;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class PaymentController extends Controller
@@ -43,6 +44,12 @@ class PaymentController extends Controller
     {
         $response = $this->service->getQrCode($asaasId);
         return GetQrCodeResource::make($response);
+    }
+
+    public function getPayments(Request $request)
+    {
+        $payments =  $this->service->getPaymentsPaginated();
+        return view('payment.payments', compact('payments'));
     }
     
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enum\BillingType;
 use App\Enum\Status;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,6 +26,7 @@ class Payment extends Model
 
     protected $casts = [
         'status' => Status::class,
+        'billing_type' => BillingType::class
     ];
     public function customer(): BelongsTo
     {

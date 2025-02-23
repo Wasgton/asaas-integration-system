@@ -16,8 +16,9 @@ Route::middleware('auth')->group(function () {
 
 Route::group(['prefix'=>'payment'], static function(){
     Route::get('/', [PaymentController::class, 'index'])->name('payment.index');
-    Route::post('/', [PaymentController::class,'makePayment'])->name('payment');
+    Route::post('/', [PaymentController::class,'makePayment'])->name('payment.makePayment');
     Route::get('/get-qrcode/{asaasId}', [PaymentController::class,'getQrCode'])->name('payment.getQrCode');
+    Route::get('/payments', [PaymentController::class,'getPayments'])->name('payment.getPayments');
 });
 
 require __DIR__.'/auth.php';

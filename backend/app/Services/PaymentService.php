@@ -7,6 +7,7 @@ use App\Payments\Factories\PaymentFactory;
 use App\Repositories\Contracts\ApiRepository;
 use App\Repositories\Contracts\PaymentRepository;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 
@@ -38,5 +39,15 @@ class PaymentService
             throw new ValidationException($validator);
         }
         return $this->apiRepository->getQrCode($asaasId);
+    }
+
+    public function getPaymentsPaginated(): LengthAwarePaginator
+    {
+        $user = auth()->user();
+        $customer = $user->customer()->first();
+        if (!$customer) {
+            return new LengthAwarePaginator(items:[],total:0,perPage: 15);
+        }
+        return $this->repository->getPayments($customer);
     }
 }

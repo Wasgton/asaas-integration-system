@@ -1,13 +1,8 @@
 @extends('layouts.layout')
 @section('content')
-    @if($errors->has('error'))
-        <div class="text-red-600 w-full border rounded px-3 py-2 mb-3 text-center">
-            <p class="mt-2 text-lg text-red-600">{{  $errors->first('error') }}</p>
-        </div>
-    @endif
     <div class="bg-white p-6 rounded-lg shadow-md mx-auto">
         <h2 class="text-2xl font-bold mb-4 text-gray-700">Pagamento</h2>
-        <form action="{{route('payment')}}" method="POST">
+        <form action="{{route('payment.makePayment')}}" method="POST">
             @method('post')
             @csrf
             <div id="content" class="flex flex-row space-x-4 justify-between">

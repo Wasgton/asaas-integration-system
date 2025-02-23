@@ -3,12 +3,11 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class PaymentControllerTest extends TestCase
 {
-    use RefreshDatabase,WithFaker;
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */
