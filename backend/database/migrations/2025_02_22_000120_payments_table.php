@@ -19,9 +19,10 @@ return new class extends Migration
             $table->string('billing_type');
             $table->string('status');
             $table->string('payment_date')->nullable();
+            $table->string('bank_slip_url')->nullable();
             $table->string('invoice_number');
             $table->string('invoice_url');
-            $table->string('transaction_receipt_url');
+            $table->string('transaction_receipt_url')->nullable();
             $table->boolean('deleted');
             $table->boolean('anticipated');
             $table->timestamps();

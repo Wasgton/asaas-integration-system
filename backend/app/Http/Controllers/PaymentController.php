@@ -6,6 +6,7 @@ use App\Exceptions\ApiException;
 use App\Http\Requests\PaymentRequest;
 use App\Services\PaymentService;
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Validation\ValidationException;
 
 class PaymentController extends Controller
 {
@@ -30,9 +31,10 @@ class PaymentController extends Controller
         try {
             $response = $this->service->createPayment($data);
             return view('payment.confirmation', compact('response'));
-        } catch(ApiException $e){
+        } catch(ApiException|ValidationException $e){
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         } catch(\Exception $e){
+            dd($e->getMessage());
             return redirect()->back()->withInput()->withErrors(['error' => 'Erro ao processar pagamento.']);
         }
     }
