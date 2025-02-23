@@ -23,9 +23,10 @@
     @auth
         <div class="container mx-auto flex items-center justify-end space-x-4">
             <a href="{{ route('register') }}" class="text-white hover:text-blue-500">Perfil</a>
-            <a href="{{ route('login') }}" class="text-white hover:text-blue-500">
-                Logout
-            </a>
+            <form action="{{ route('logout') }}" method="POST" class="inline">
+                @csrf
+                <button type="submit" class="text-white hover:text-blue-500">Logout</button>
+            </form>
         </div>
     @endauth
 </header>
