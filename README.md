@@ -1,66 +1,99 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Perfect Pay
+* Autor: Wasgton Rodrigues Junior
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Projeto desenvolvido como avaliação para a  **Perfect Pay**, utilizando Laravel.
 
-## About Laravel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+#### Introdução
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- O Projeto é um sistema desenvolvido em PHP utilizando o framework **Laravel (v11.43.0)**. Este sistema fornece opções de pagamento e processamento de transações integrando com a API da Asaas.
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+#### Como rodar localmente
 
-## Learning Laravel
+#### Pré-requisitos
+Certifique-se de ter as dependências abaixo instaladas:
+- [x] Docker;
+- [x] Docker compose.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Executando
+1. Clone o repositório:
+```shell
+git clone <URL-do-repositorio>
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+2. Inicie os containers via `docker-compose`:
+```shell
+docker-compose up -d
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+3. Acesse o container PHP usando o comando:
+```shell
+docker-compose exec php bash
+```
 
-## Laravel Sponsors
+4. Para facilitar a execução, o projeto inclui um comando personalizado no composer. Execute:
+```shell
+composer install
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Esta etapa instalará todas as dependências, configurará o `.env` automaticamente (baseado no `.env.example`) e executará as migrations necessárias.
 
-### Premium Partners
+###### _Nota_: Por se tratar de um teste deixei as configurações do `.env.example` alinhadas com as definições do arquivo `docker-compose.yml`, tornando o fluxo inicial mais ágil.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+#### Testes
+Os testes são escritos utilizando **PHPUnit**, garantindo a qualidade do código antes de produção. Para rodar os testes, utilize:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```shell
+php artisan test
+```
 
-## Code of Conduct
+Ou, para um relatório mais detalhado com cobertura do código:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```shell
+php artisan test --coverage
+```
 
-## Security Vulnerabilities
+> Nota: Os testes requerem que o banco de dados esteja configurado e funcional.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Conceitos Utilizados
+O desenvolvimento deste projeto utilizou boas práticas e conceitos modernos, incluindo:
+- **Desenvolvimento Orientado a Testes (TDD)**: Facilita validação incremental das funcionalidades, garantindo maior segurança nas entregas.
+- **Princípios SOLID**: Melhorando a extensibilidade, manutenção e clareza do código.
+- **Padrão de Projeto Strategy**: Este padrão foi utilizado para promover a flexibilidade do código ao lidar com
+  diferentes comportamentos de forma intercambiável. No contexto deste projeto, o padrão Strategy foi aplicado, na escolha de diferentes métodos de pagamento (como cartões de crédito, débito e PIX)
+- **Factory Method**: Ele simplifica a inicialização dos objetos e garante que cada tipo de pagamento seja instanciado corretamente por uma lógica consistente.
+- **Service Repository Pattern**: O padrão Service Repository foi utilizado neste projeto como uma camada intermediária
+  entre o modelo de dados e a lógica de negócios. Esse padrão contribui para a organização e separação de
+  responsabilidades do código, permitindo que:
+
+    - Os **Repositories** atuam como abstrações que lidam diretamente com a interação com o banco de dados, como
+      consultas ou manipulação de dados.
+    - Os **Services** concentrem a lógica de negócios do sistema, chamando os repositórios e executando as regras
+      necessárias para cada funcionalidade.
+
+  Essa divisão facilita não apenas a manutenção e testabilidade do código, mas também o reaproveitamento de lógica de
+  negócios em diferentes partes do sistema.
+
+---
+
+## Pontos a melhorar:
+
+- **Cobertura de testes ampliada**: Expandir a cobertura dos testes unitários e de integração para assegurar que todas
+  as funcionalidades estejam devidamente validadas.
+
+- **Gerenciamento de e logs**: Integrar um sistema robusto para rastreamento e gerenciamento logs como Sentry ou Monolog, visando facilitar a depuração e manutenção.
+
+- **Internacionalização (i18n)**: Introduzir suporte a multi-idiomas para ampliar o alcance do sistema em diferentes
+  regiões.
+
+- **Adicionar opção de parcelamento no cartão de crédito.**
+- **Adicionar mecanismo para atualizar status de pagamento de boleto.**
+
+
+Projeto desenvolvido utilizando **Laravel**, buscando conciliar práticas modernas de desenvolvimento de software com recursos eficientes para aplicativos de alta performance.
