@@ -1,7 +1,7 @@
 @extends('layouts.layout')
 @section('content')
     @if($errors->has('error'))
-        <div class="text-red-600 w-full border rounded px-3 py-2 mb-3">
+        <div class="text-red-600 w-full border rounded px-3 py-2 mb-3 text-center">
             <p class="mt-2 text-lg text-red-600">{{  $errors->first('error') }}</p>
         </div>
     @endif
@@ -213,7 +213,6 @@
                     }
                 });
             });
-
         });
     </script>
 

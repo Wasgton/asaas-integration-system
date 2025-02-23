@@ -15,5 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->renderable(function (Illuminate\Contracts\Validation\ValidationException $e, $request) {
+            if ($request->wantsJson()) {
+                dd($e->getMessage());
+                return response()->json(['message' => $e->getMessage()], Response::HTTP_NOT_FOUND);
+            }
+        });
     })->create();

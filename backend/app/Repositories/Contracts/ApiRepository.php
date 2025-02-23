@@ -9,4 +9,5 @@ interface ApiRepository
     public function sendCustomerCreationRequest(array $customerRequestData): string;
     public function getCustomerById(string $id): array|null;
     public function createPayment(array $data);
+    public function getQrCode(string $id) : array;
 }

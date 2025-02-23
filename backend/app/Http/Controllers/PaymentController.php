@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\ApiException;
 use App\Http\Requests\PaymentRequest;
+use App\Http\Resources\GetQrCodeResource;
 use App\Services\PaymentService;
 use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Validation\ValidationException;
@@ -34,8 +35,14 @@ class PaymentController extends Controller
         } catch(ApiException|ValidationException $e){
             return redirect()->back()->withInput()->withErrors(['error' => $e->getMessage()]);
         } catch(\Exception $e){
-            dd($e->getMessage());
             return redirect()->back()->withInput()->withErrors(['error' => 'Erro ao processar pagamento.']);
         }
     }
+
+    public function getQrCode(string $asaasId)
+    {
+        $response = $this->service->getQrCode($asaasId);
+        return GetQrCodeResource::make($response);
+    }
+    
 }

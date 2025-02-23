@@ -14,7 +14,7 @@ class BoletoPayment implements PaymentMethod
     public function __construct(
         private ApiRepository $apiRepository
     ){}
-    public function processPayment(array $paymentData)
+    public function processPayment(array $paymentData): array
     {
         $customerId = $paymentData['customer']->id;
         $paymentData['customer'] = $paymentData['customer']->asaas_id;
@@ -48,8 +48,17 @@ class BoletoPayment implements PaymentMethod
             'billingType' => 'required|in:BOLETO',
             'value'       => 'required|numeric|min:1',
             'dueDate'     => 'required|date_format:Y-m-d|after:' . Carbon::now()->addDays(4)->format('Y-m-d'),
-        ],
-        );
+        ],[
+            'customer.required'    => 'O campo cliente é obrigatório.',
+            'billingType.required' => 'O campo tipo de cobrança é obrigatório.',
+            'billingType.in'       => 'O campo tipo de cobrança deve conter o valor: BOLETO.',
+            'value.required'       => 'O campo valor é obrigatório.',
+            'value.numeric'        => 'O campo valor deve ser numérico.',
+            'value.min'            => 'O campo valor deve ser no mínimo 1.',
+            'dueDate.required'     => 'O campo data de vencimento é obrigatório.',
+            'dueDate.date_format'  => 'O campo data de vencimento deve estar no formato: Y-m-d.',
+            'dueDate.after'        => 'O campo data de vencimento deve ser uma data posterior a ' . Carbon::now()->addDays(4)->format('d/m/Y') . '.',
+        ]);
         if ($validator->fails()) {
             throw new ValidationException($validator);
         }

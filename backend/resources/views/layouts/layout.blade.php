@@ -30,7 +30,7 @@
         </div>
     @endauth
 </header>
-<main class="container mx-auto mt-10 ">
+<main class="container mx-auto mt-10">
     @yield('content')
 </main>
 

@@ -6,6 +6,7 @@ use App\Repositories\Contracts\ApiRepository;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AsaasApiRepository implements ApiRepository
 {
@@ -77,6 +78,19 @@ class AsaasApiRepository implements ApiRepository
     public function createPayment(array $data) : array
     {
         $response = $this->client->request('POST', 'payments', ['http_errors' => false, 'json' => $data]);
+        return json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+    }
+
+    /**
+     * @throws GuzzleException
+     * @throws \JsonException
+     */
+    public function getQrCode(string $id): array
+    {
+        $response = $this->client->request('GET', 'payments/'.$id.'/pixQrCode');
+        if ($response->getStatusCode() === 404) {
+            throw new NotFoundHttpException();
+        }
         return json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
     }
 
