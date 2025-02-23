@@ -14,11 +14,6 @@ class PaymentRepositoryEloquent implements PaymentRepository
         return Payment::create($data);
     }
 
-    public function getPaymentByAsaasId(string $asaasId): Payment|null
-    {
-        return Payment::where('asaas_id', $asaasId)->first();
-    }
-
     public function getPayments(Customer $customer): LengthAwarePaginator
     {
         return Payment::where('customer_id',$customer->id)
