@@ -19,7 +19,7 @@ Certifique-se de ter as dependências abaixo instaladas:
 #### Executando
 1. Clone o repositório:
 ```shell
-git clone <URL-do-repositorio>
+git clone https://github.com/Wasgton/asaas-integration-system.git
 ```
 
 2. Inicie os containers via `docker-compose`:
@@ -27,12 +27,22 @@ git clone <URL-do-repositorio>
 docker-compose up -d
 ```
 
-3. Acesse o container PHP usando o comando:
+3. Instale as dependencias do `npm`:
+```shell
+npm install 
+```
+
+4. Execute do build do front-end:
+```shell
+npm run build 
+```
+
+5. Acesse o container PHP usando o comando:
 ```shell
 docker-compose exec php bash
 ```
 
-4. Para facilitar a execução, o projeto inclui um comando personalizado no composer. Execute:
+6. Para facilitar a execução, o projeto inclui um comando personalizado no composer. Execute:
 ```shell
 composer install
 ```
@@ -41,7 +51,8 @@ Esta etapa instalará todas as dependências, configurará o `.env` automaticame
 
 ###### _Nota_: Por se tratar de um teste deixei as configurações do `.env.example` alinhadas com as definições do arquivo `docker-compose.yml`, tornando o fluxo inicial mais ágil.
 
-5. Adicione o ASAAS_API_KEY com o token da sua conta.
+7. Adicione o ASAAS_API_KEY com o token da sua conta. 
+Ex.:
 ````
 ASAAS_API_KEY=$aact_MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmNjODhlZjE1LTA2OGQtNDlhZi1hZmRhLTg0ZDhmOTI3NDdmZDo6JGFhY2hfNDFlYTgwM2YtNjNlNi00MGY4L3123D3dasdaDg12312dasd3M2UxYzY0Mzdj
 ASAAS_BASE_URL=https://sandbox.asaas.com/api/v3/
