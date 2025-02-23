@@ -15,6 +15,8 @@ Projeto desenvolvido como avaliação para a  **Perfect Pay**, utilizando Larave
 Certifique-se de ter as dependências abaixo instaladas:
 - [x] Docker;
 - [x] Docker compose.
+- [x] nodejs 18.19
+- [x] npm 9.2.0
 
 #### Executando
 1. Clone o repositório:
@@ -24,7 +26,7 @@ git clone https://github.com/Wasgton/asaas-integration-system.git
 
 2. Inicie os containers via `docker-compose`:
 ```shell
-docker-compose up -d
+docker compose up -d
 ```
 
 3. Instale as dependencias do `npm`:
@@ -39,12 +41,12 @@ npm run build
 
 5. Acesse o container PHP usando o comando:
 ```shell
-docker-compose exec php bash
+docker compose exec php bash
 ```
 
 6. Para facilitar a execução, o projeto inclui um comando personalizado no composer. Execute:
 ```shell
-composer install
+composer run install
 ```
 
 Esta etapa instalará todas as dependências, configurará o `.env` automaticamente (baseado no `.env.example`) e executará as migrations necessárias.
