@@ -7,10 +7,10 @@
                 <p class="mt-4 text-gray-700">Pedido Confirmado</p>
                 <p class="mt-4 text-gray-700">Status do pagamento: {{$response->status->getDisplayName()}}</p>
             </div>
-            @if($response->billing_type==='BOLETO')
+            @if($response->billing_type===App\Enum\BillingType::BOLETO)
                 @include('payment.parts.boleto-confirmation')
             @endif
-            @if($response->billing_type==='PIX')
+            @if($response->billing_type===App\Enum\BillingType::PIX)
                 @include('payment.parts.pix-confirmation')
             @endif
             <div class="mt-6">
