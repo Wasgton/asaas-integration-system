@@ -105,6 +105,10 @@ O desenvolvimento deste projeto utilizou boas práticas e conceitos modernos, in
 
 - **Cobertura de testes ampliada**: Expandir a cobertura dos testes unitários e de integração para assegurar que todas
   as funcionalidades estejam devidamente validadas.
+  
+- **Front-end desacoplado**: Escrever uma aplicação front-end desacoplada e integrar com o back-end.
+
+- **Front-end validações**: Adicionar máscaras e validações para o formulario no front-end.
 
 - **Gerenciamento de e logs**: Integrar um sistema robusto para rastreamento e gerenciamento logs como Sentry ou Monolog, visando facilitar a depuração e manutenção.
 
@@ -112,7 +116,7 @@ O desenvolvimento deste projeto utilizou boas práticas e conceitos modernos, in
   regiões.
 
 - **Adicionar opção de parcelamento no cartão de crédito.**
-- **Adicionar mecanismo para atualizar status de pagamento de boleto.**
+- **Adicionar mecanismo para atualizar status de pagamento de boleto.**: Implementar mecanismo para receber o retorno quando os  pagamentos forem executados e atualizar o status e outras informações.
 
 
 Projeto desenvolvido utilizando **Laravel**, buscando conciliar práticas modernas de desenvolvimento de software com recursos eficientes para aplicativos de alta performance.
